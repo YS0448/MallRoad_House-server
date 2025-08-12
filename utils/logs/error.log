@@ -1,0 +1,101 @@
+[2025-08-03T12:29:53.580Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.send (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:161:12)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:250:15)
+    at contactUs (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\contactController.js:53:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-03T12:33:47.271Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.send (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:161:12)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:250:15)
+    at contactUs (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\contactController.js:53:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-03T12:39:41.012Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.send (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:161:12)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:250:15)
+    at contactUs (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\contactController.js:47:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-03T12:43:03.778Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.send (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:161:12)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:250:15)
+    at contactUs (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\contactController.js:47:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-03T12:55:52.010Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.send (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:161:12)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:250:15)
+    at contactUs (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\contactController.js:47:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-03T13:34:25.702Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.send (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:161:12)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:250:15)
+    at contactUs (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\contactController.js:48:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-03T14:03:13.891Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.send (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:161:12)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:250:15)
+    at contactUs (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\contactController.js:49:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-08T12:38:53.340Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.send (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:161:12)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:250:15)
+    at myOrders (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\orderController.js:76:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-08T12:38:56.671Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:247:10)
+    at myOrders (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\orderController.js:76:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-08T12:39:05.804Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:247:10)
+    at myOrders (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\orderController.js:76:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-08T12:39:39.661Z] Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:659:11)
+    at ServerResponse.header (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:684:10)
+    at ServerResponse.json (D:\Restaurant_Project\MallRoad_House-server\node_modules\express\lib\response.js:247:10)
+    at myOrders (D:\Restaurant_Project\MallRoad_House-server\controllers\customer\orderController.js:76:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-09T18:46:01.031Z] ReferenceError: res is not defined
+    at getDashboardData (D:\Restaurant_Project\MallRoad_House-server\controllers\admin\dashboardController.js:49:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-09T18:46:18.027Z] ReferenceError: res is not defined
+    at getDashboardData (D:\Restaurant_Project\MallRoad_House-server\controllers\admin\dashboardController.js:49:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-09T18:46:22.022Z] ReferenceError: res is not defined
+    at getDashboardData (D:\Restaurant_Project\MallRoad_House-server\controllers\admin\dashboardController.js:49:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+[2025-08-09T18:46:23.370Z] ReferenceError: res is not defined
+    at getDashboardData (D:\Restaurant_Project\MallRoad_House-server\controllers\admin\dashboardController.js:49:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
