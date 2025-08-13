@@ -31,7 +31,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(routes)
 app.get('/', (req,res) =>{        
-    res.send('Welcone to Mall Road House API');
+    res.send('Welcome to Mallroad House Backend');
 })
 
 app.use(errorHandler)
