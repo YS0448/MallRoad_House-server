@@ -6,7 +6,6 @@ const captcha = async (req, res) => {
   try {
     
     req.session.captcha = captcha.text;
-    console.log(req.session.captcha)
     res.status(200).json({
       data: captcha.data, // the SVG image
     });

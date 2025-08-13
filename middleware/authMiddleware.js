@@ -4,7 +4,6 @@ const executeQuery = require('../config/dbConnection'); // or wherever your DB h
 // Authentication Middleware
 const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  console.log('authHeader111:', authHeader);
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: 'Unauthorized' });

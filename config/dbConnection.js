@@ -15,51 +15,11 @@ const dbConnection = pool.promise();
     try{
         await dbConnection.query('SELECT 1');
         console.log('Connected to the database');
-    } catch(err){
-        console.log('Error connecting to the database:', err);
+    } catch(error){
+        console.error('Error connecting to the database:', error);
         process.exit(1);
     }
 })()
 
 
 module.exports = dbConnection;
-
-// --------------------------------------------------------------
-// promisePool.query('SELECT 1')
-//     .then(()=>{
-//         console.log('Connected to the database');
-//     })
-//     .catch((err)=>{
-//         console.log('Error connecting to the database:', err);
-//     })
-
-// --------------------------------------------------------------
-// --------------------------------------------------------------
-// --------------------------------------------------------------
-
-// const express = require('express');
-// const mysql = require('mysql2');
-
-// const dbConnection = mysql.createConnection({
-//     host:'localhost',
-//     user:'root',
-//     password:'Nomistake@4579',
-//     database:'frame_craft'
-// })
-
-
-
-// dbConnection.connect((err)=>{
-//     if(err){
-//         console.log('Error connecting to the database:', err);
-//     }
-//     else{
-//         console.log('Connected to the database');
-//     }
-// })
-
-
-// module.exports = dbConnection;
-
-
-

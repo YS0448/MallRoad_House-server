@@ -46,14 +46,12 @@ const addToCart= async (req,res)=>{
 // const getAddToCart= async(req,res)=>{
 //     try{
 //         const user_id = req.user.user_id;
-//         console.log('user_id:', user_id);
 //         const cartDataQuery = `
 //             SELECT c.item_id, c.cart_id, tkm.item_name, tkm.price, tkm.image_path, tkm.allergens_icons, c.number_of_items 
 //             FROM cart c JOIN takeaway_menu tkm ON
 //                 c.item_id = tkm.item_id 
 //             WHERE c.user_id =?`;
 //         const cartData = await executeQuery(cartDataQuery, [user_id]);
-//         // console.log('cartData:', cartData);
 //         return res.status(200).json(cartData );    
 //     }catch(error){
 //         console.error('Error in /cart/data:', error);
@@ -63,7 +61,6 @@ const addToCart= async (req,res)=>{
 // const getAddToCart = async (req, res) => {
 //   try {
 //     const user_id = req.user.user_id;
-//     console.log("user_id:", user_id);
 
 //     // pagination params
 //     let page = parseInt(req.query.page) || 1;
@@ -147,7 +144,6 @@ const getAddToCart = async (req, res) => {
 const removeFromCart= async(req,res)=>{
     try {
         const cart_id =  req.params.cart_id;
-        console.log('cart_id:', cart_id);
         // Ensure item_id is provided
         if (!cart_id) {
             return res.status(400).json({ message: 'Cart ID is required' });
@@ -176,7 +172,6 @@ const updateCartItem = async (req, res) => {
   const { cart_id } = req.params;
   const { number_of_items } = req.body;
   const user_id = req.user.user_id;
-  console.log('user_id:', user_id);
 
   if (number_of_items < 0) {
     return res.status(400).json({ error: "number_of_items cannot be negative" });

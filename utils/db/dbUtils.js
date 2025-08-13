@@ -6,7 +6,7 @@ let executeQuery = async (query, params=[]) => {
         return rows;
     }
     catch(err){
-        console.log('Error executing query:', err);
+        console.error('Error executing query:', err);
         throw err;
     }
 }

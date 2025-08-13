@@ -9,7 +9,6 @@ const sendEmail = require("../../utils/email/sendEmail");
 const getCurrentUser = async (req, res) => {
   try {
     const user_id = req.user.user_id;
-    console.log('user_id000000000:', user_id);
 
     const user = await executeQuery(
       'SELECT user_id, email, full_name, role, status FROM users WHERE user_id = ?',
@@ -78,13 +77,11 @@ const login = async (req, res) => {
 const signup = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
-    console.log('req.body:', req.body);
     const role = "customer";
     const status = "active";
 
     const checkUserQuery = "SELECT * FROM users WHERE email = ?";
     const existingUser = await executeQuery(checkUserQuery, [email]);
-    console.log('existingUser:', existingUser);
     if (existingUser.length > 0) {
       return res.status(400).json({ message: "User already exists" });
     }
