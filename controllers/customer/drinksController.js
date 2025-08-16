@@ -17,12 +17,12 @@ const getDrinksMenu = async (req, res) => {
           image_path,                
           status                
       FROM drinks_menu 
-      WHERE item_name LIKE ?
+      WHERE item_name LIKE ? OR category_name LIKE ?
       ORDER BY category_name DESC
       LIMIT ? OFFSET ?
     `;
 
-    const params = [searchPattern, limit, offset];
+    const params = [searchPattern, searchPattern, limit, offset];
     const items = await executeQuery(getDrinksMenuQry, params);
 
     return res.status(200).json(items);

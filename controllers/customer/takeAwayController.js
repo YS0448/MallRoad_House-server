@@ -42,16 +42,16 @@ const getTakeawayMenu = async (req, res) => {
           tkm.allergens_icons,
           tkm.price,
           tkm.status,
-          COALESCE(c.number_of_items, 0) AS number_of_items,
+          COALESCE(c.quantity, 0) AS quantity,
           c.cart_id
         FROM takeaway_menu tkm
         LEFT JOIN cart c 
           ON tkm.item_id = c.item_id AND c.user_id = ?
-        WHERE tkm.item_name LIKE ?
+        WHERE tkm.item_name LIKE ? OR tkm.category_name LIKE ? 
         ORDER BY tkm.category_name, tkm.created_at DESC
         LIMIT ? OFFSET ?
       `;
-      params = [user_id, searchPattern, limit, offset];
+      params = [user_id, searchPattern,  searchPattern, limit, offset];
     }
 
     const items = await executeQuery(getTakeawayMenuQry, params);

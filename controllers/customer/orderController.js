@@ -62,7 +62,7 @@ const myOrders = async (req, res) => {
         o.status,
         o.created_at,
         oi.order_item_id,
-        oi.number_of_items,
+        oi.quantity,
         oi.per_item_price,
         oi.total_price,
         tkm.item_name        
@@ -84,7 +84,7 @@ const myOrders = async (req, res) => {
         status,
         created_at,
         order_item_id,
-        number_of_items,
+        quantity,
         per_item_price,
         total_price,
         item_name,
@@ -102,7 +102,7 @@ const myOrders = async (req, res) => {
       if (order_item_id) {
         ordersMap.get(order_id).items.push({
           order_item_id,
-          number_of_items,
+          quantity,
           per_item_price: parseFloat(per_item_price),
           total_price: parseFloat(total_price),
           item_name,  // <-- Include item_name here

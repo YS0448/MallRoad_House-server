@@ -43,25 +43,25 @@ async function insertOrderHeader(user_id, shippingData, paymentMethod, totalAmou
 async function insertOrderItems(orderId, items, createdAt, updatedAt) {
   const insertItemQuery = `
     INSERT INTO order_items (
-      order_id, item_id, item_name, number_of_items, per_item_price, total_price, created_at, updated_at
+      order_id, item_id, item_name, quantity, per_item_price, total_price, created_at, updated_at
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   for (const item of items) {
-    const { item_id, item_name, number_of_items, price } = item;
+    const { item_id, item_name, quantity, price } = item;
 
-    if (!number_of_items || number_of_items <= 0) {
+    if (!quantity || quantity <= 0) {
       throw new Error("Number of items must be greater than 0");
     }
 
     const per_item_price = parseFloat(price);
-    const total_price = per_item_price * number_of_items;
+    const total_price = per_item_price * quantity;
 
     const params = [
       orderId,
       item_id,
       item_name,
-      number_of_items,
+      quantity,
       per_item_price,
       total_price,
       createdAt,
@@ -74,7 +74,7 @@ async function insertOrderItems(orderId, items, createdAt, updatedAt) {
 
 async function deleteItemsFromCart(user_id, items) {
   // Extract all cart_ids from items that exist in cart, or delete by user_id and item_id
-  // Assuming `items` have `item_id` and `number_of_items` (no cart_id), we'll delete by user_id + item_id
+  // Assuming `items` have `item_id` and `quantity` (no cart_id), we'll delete by user_id + item_id
 
   for (const item of items) {
 

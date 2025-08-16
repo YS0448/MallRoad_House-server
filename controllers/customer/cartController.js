@@ -3,7 +3,7 @@ const {getUTCDateTime} = require('../../utils/date/dateUtils');
 
 const addToCart= async (req,res)=>{
     try{
-        const { item_id, number_of_items} = req.body;
+        const { item_id, quantity} = req.body;
         const user_id = req.user.user_id;
 
         // check status of item before adding to cart
@@ -20,17 +20,17 @@ const addToCart= async (req,res)=>{
         }
 
         // Check if item already exists in cart
-        const checkCartQuery = "SELECT number_of_items FROM cart WHERE user_id = ? AND item_id = ?";
+        const checkCartQuery = "SELECT quantity FROM cart WHERE user_id = ? AND item_id = ?";
         const cartItem = await executeQuery(checkCartQuery, [user_id, item_id]);
         if (cartItem && cartItem.length > 0) {
-            // Update the number_of_items
-            const updateCartQuery = "UPDATE cart SET number_of_items = number_of_items + ?, updated_at = ? WHERE user_id = ? AND item_id = ?";
-            const result= await executeQuery(updateCartQuery, [number_of_items, getUTCDateTime(), user_id, item_id]);
+            // Update the quantity
+            const updateCartQuery = "UPDATE cart SET quantity = quantity + ?, updated_at = ? WHERE user_id = ? AND item_id = ?";
+            const result= await executeQuery(updateCartQuery, [quantity, getUTCDateTime(), user_id, item_id]);
             res.status(200).json({ message: 'Cart updated successfully' });
         } else {
             // Insert new item into cart
-            const addToCartQuery = "INSERT INTO cart (user_id, item_id, number_of_items, created_at, updated_at) VALUES (?,?,?,?,?)";
-            let result = await executeQuery(addToCartQuery, [user_id, item_id, number_of_items, getUTCDateTime(), getUTCDateTime()]);
+            const addToCartQuery = "INSERT INTO cart (user_id, item_id, quantity, created_at, updated_at) VALUES (?,?,?,?,?)";
+            let result = await executeQuery(addToCartQuery, [user_id, item_id, quantity, getUTCDateTime(), getUTCDateTime()]);
             res.status(200).json({ cart_id:result.insertId, message: 'Item added to cart' });
         }
 
@@ -47,7 +47,7 @@ const addToCart= async (req,res)=>{
 //     try{
 //         const user_id = req.user.user_id;
 //         const cartDataQuery = `
-//             SELECT c.item_id, c.cart_id, tkm.item_name, tkm.price, tkm.image_path, tkm.allergens_icons, c.number_of_items 
+//             SELECT c.item_id, c.cart_id, tkm.item_name, tkm.price, tkm.image_path, tkm.allergens_icons, c.quantity 
 //             FROM cart c JOIN takeaway_menu tkm ON
 //                 c.item_id = tkm.item_id 
 //             WHERE c.user_id =?`;
@@ -74,7 +74,7 @@ const addToCart= async (req,res)=>{
 
 //     // get paginated items
 //     const cartDataQuery = `
-//       SELECT c.item_id, c.cart_id, tkm.item_name, tkm.price, tkm.image_path, tkm.allergens_icons, c.number_of_items 
+//       SELECT c.item_id, c.cart_id, tkm.item_name, tkm.price, tkm.image_path, tkm.allergens_icons, c.quantity 
 //       FROM cart c 
 //       JOIN takeaway_menu tkm ON c.item_id = tkm.item_id 
 //       WHERE c.user_id = ?
@@ -105,7 +105,7 @@ const getAddToCart = async (req, res) => {
         tkm.price, 
         tkm.image_path, 
         tkm.allergens_icons, 
-        c.number_of_items
+        c.quantity
       FROM cart c
       JOIN takeaway_menu tkm ON c.item_id = tkm.item_id
       WHERE c.user_id = ?;
@@ -116,8 +116,8 @@ const getAddToCart = async (req, res) => {
     const totalsQuery = `
       SELECT 
         COUNT(*) AS totalCount, 
-        SUM(c.number_of_items) AS totalItems,
-        SUM(c.number_of_items * tkm.price) AS totalAmount
+        SUM(c.quantity) AS totalItems,
+        SUM(c.quantity * tkm.price) AS totalAmount
       FROM cart c
       JOIN takeaway_menu tkm ON c.item_id = tkm.item_id
       WHERE c.user_id = ?;
@@ -170,15 +170,15 @@ const removeFromCart= async(req,res)=>{
 
 const updateCartItem = async (req, res) => {
   const { cart_id } = req.params;
-  const { number_of_items } = req.body;
+  const { quantity } = req.body;
   const user_id = req.user.user_id;
 
-  if (number_of_items < 0) {
-    return res.status(400).json({ error: "number_of_items cannot be negative" });
+  if (quantity < 0) {
+    return res.status(400).json({ error: "quantity cannot be negative" });
   }
 
   try {
-    if (number_of_items === 0) {
+    if (quantity === 0) {
       // Delete the row
       const deleteQuery = `DELETE FROM cart WHERE cart_id = ? AND user_id = ?`;
       const deleteResult = await executeQuery(deleteQuery, [cart_id, user_id]);
@@ -190,13 +190,13 @@ const updateCartItem = async (req, res) => {
       return res.status(200).json({ message: "Cart item removed" });
     }
 
-    // Update number_of_items
+    // Update quantity
     const updateQuery = `
       UPDATE cart 
-      SET number_of_items = ?, updated_at = ?
+      SET quantity = ?, updated_at = ?
       WHERE cart_id = ? AND user_id = ?
     `;
-    const updateResult = await executeQuery(updateQuery, [number_of_items, getUTCDateTime(), cart_id, user_id]);
+    const updateResult = await executeQuery(updateQuery, [quantity, getUTCDateTime(), cart_id, user_id]);
 
     if (updateResult.affectedRows === 0) {
       return res.status(404).json({ error: "Cart item not found" });
