@@ -19,7 +19,7 @@ router.post('/createDiningMenu',authenticate, createDiningMenu)
 // Drinks routes
 router.get('/getDrinksCatogories',authenticate, getDrinksCatogories)
 router.post('/createDrinksMenu',authenticate, createDrinksMenu)
-router.post('/createDrinksMenu',authenticate, createDrinksMenu)
+
 
 // dashboard 
 router.get('/dashboard', authenticate, getDashboardData)
