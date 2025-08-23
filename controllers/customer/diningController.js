@@ -10,7 +10,7 @@ const getDiningMenu = async (req, res) => {
 
     const getDiningMenuQry = `
       SELECT 
-          item_id,
+          meal_id,
           category_name,
           item_name,
           description,

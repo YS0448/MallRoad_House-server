@@ -7,7 +7,7 @@ const { getDrinksCatogories, createDrinksMenu } = require('../controllers/admin/
 const { getDashboardData } = require('../controllers/admin/dashboardController.js');
 const { getAllUserDetails, toggleUserStatus } = require('../controllers/admin/manageUserController.js');
 const { addGalleryImage } = require('../controllers/admin/galleryController');
-
+const { createSetMealMenu } = require('../controllers/admin/setMealController');
 // Takeaway routes
 router.get('/getTakeawayCatogories',authenticate, getTakeawayCatogories)
 router.post('/createTakeAwayMenu',authenticate, createTakeAwayMenu)
@@ -30,5 +30,9 @@ router.put("/toggleUserStatus/:user_id", toggleUserStatus);
 
 // Gallery routes
 router.post('/gallery/add', authenticate, addGalleryImage)
+
+
+// Set Meal routes
+router.post('/createSetMealMenu',authenticate, createSetMealMenu);
 
 module.exports = router;

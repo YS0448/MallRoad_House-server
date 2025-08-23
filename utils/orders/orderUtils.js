@@ -3,24 +3,25 @@ const {executeQuery} = require('../db/dbUtils');
 // Check availability of items
 async function checkItemsAvailability(items) {
   for (const item of items) {
-    const { item_id } = item;
-    if (!item_id) throw new Error("Item ID is required for each item");
+    const { meal_id } = item;
+    if (!meal_id) throw new Error("Item ID is required for each item");
 
-    const query = "SELECT status FROM takeaway_menu WHERE item_id = ?";
-    const result = await executeQuery(query, [item_id]);
+    const query = "SELECT status FROM takeaway_menu WHERE meal_id = ?";
+    const result = await executeQuery(query, [meal_id]);
 
     if (!result || result.length === 0) {
-      throw new Error(`Item with ID ${item_id} not found`);
+      throw new Error(`Item with ID ${meal_id} not found`);
     }
 
     if (result[0].status !== "available") {
-      throw new Error(`Item with ID ${item_id} is not available`);
+      throw new Error(`Item with ID ${meal_id} is not available`);
     }
   }
 }
 
 // Insert order header and return inserted order_id
 async function insertOrderHeader(user_id, shippingData, paymentMethod, totalAmount, createdAt, updatedAt) {
+  console.log('user_id, shippingData, paymentMethod, totalAmount, createdAt, updatedAt:', user_id, shippingData, paymentMethod, totalAmount, createdAt, updatedAt);
   const { fullName, phoneNumber, pinCode, address, landmark } = shippingData;
 
   const insertOrderQuery = `
@@ -41,48 +42,81 @@ async function insertOrderHeader(user_id, shippingData, paymentMethod, totalAmou
 
 // Insert all order items
 async function insertOrderItems(orderId, items, createdAt, updatedAt) {
-  const insertItemQuery = `
-    INSERT INTO order_items (
-      order_id, item_id, item_name, quantity, per_item_price, total_price, created_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-  `;
+  let insertItemQuery;    
+  let params;
 
   for (const item of items) {
-    const { item_id, item_name, quantity, price } = item;
+    const { meal_id, item_name, quantity, price, extra_charge, description, menu_type } = item;
+    const desc = JSON.stringify(description); 
 
     if (!quantity || quantity <= 0) {
       throw new Error("Number of items must be greater than 0");
     }
 
-    const per_item_price = parseFloat(price);
+    const per_item_price = parseFloat(Number(price) + Number(extra_charge));
     const total_price = per_item_price * quantity;
 
-    const params = [
+    insertItemQuery = `
+      INSERT INTO order_items (
+        order_id, meal_id, set_meal_id, item_name, description, quantity, per_item_price, total_price, menu_type, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+  if(menu_type ==="takeaway"){
+    
+    params = [
       orderId,
-      item_id,
+      meal_id,
+      null,
       item_name,
+      desc,
       quantity,
       per_item_price,
       total_price,
+      menu_type,
       createdAt,
       updatedAt,
     ];
 
-    await executeQuery(insertItemQuery, params);
+  } else if(menu_type ==="set_meal"){
+
+    params = [
+      orderId,
+      null,
+      meal_id,
+      item_name,
+      desc,
+      quantity,
+      per_item_price,
+      total_price,
+      menu_type,
+      createdAt,
+      updatedAt,
+    ];
+
+  } else{
+    
   }
+
+    let insertResult= await executeQuery(insertItemQuery, params);  
+  }
+
+
 }
 
 async function deleteItemsFromCart(user_id, items) {
-  // Extract all cart_ids from items that exist in cart, or delete by user_id and item_id
-  // Assuming `items` have `item_id` and `quantity` (no cart_id), we'll delete by user_id + item_id
 
+  let deleteQuery;
   for (const item of items) {
 
-    const { item_id } = item;
-    if (!item_id) continue; // safety
+    const { cart_id } = item;
+    if (!cart_id) continue; // safety
 
-    const deleteQuery = `DELETE FROM cart WHERE user_id = ? AND item_id = ?`;
-    await executeQuery(deleteQuery, [user_id, item_id]);
+    if(cart_id){
+      deleteQuery = `DELETE FROM cart WHERE user_id = ? AND cart_id = ?`;
+    }
+
+    await executeQuery(deleteQuery, [user_id, cart_id]);
   }
 }
 

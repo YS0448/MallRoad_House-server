@@ -12,6 +12,7 @@ const {getUTCDateTime} = require("../../utils/date/dateUtils");
 const placeOrder = async (req, res) => {
   try {
     const { items, shippingData, paymentMethod, totalAmount } = req.body;
+    console.log('req.body:', req.body);
     const user_id = req?.user?.user_id || null;
 
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -65,10 +66,11 @@ const myOrders = async (req, res) => {
         oi.quantity,
         oi.per_item_price,
         oi.total_price,
-        tkm.item_name        
+        oi.item_name,    
+        oi.description    
       FROM orders o
       LEFT JOIN order_items oi ON o.order_id = oi.order_id
-      LEFT JOIN takeaway_menu tkm ON oi.item_id = tkm.item_id
+      LEFT JOIN takeaway_menu tkm ON oi.meal_id = tkm.meal_id
       WHERE o.user_id = ?
       ORDER BY o.created_at DESC, oi.order_item_id ASC
       LIMIT ? OFFSET ?
@@ -88,6 +90,7 @@ const myOrders = async (req, res) => {
         per_item_price,
         total_price,
         item_name,
+        description
       } = row;
 
       if (!ordersMap.has(order_id)) {
@@ -105,7 +108,8 @@ const myOrders = async (req, res) => {
           quantity,
           per_item_price: parseFloat(per_item_price),
           total_price: parseFloat(total_price),
-          item_name,  // <-- Include item_name here
+          item_name,  
+          description
         });
       }
     }

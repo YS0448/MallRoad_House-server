@@ -9,9 +9,11 @@ const {placeOrder, myOrders} = require('../controllers/customer/orderController'
 const {getDiningMenu } = require('../controllers/customer/diningController'); // Place order
 const {getDrinksMenu } = require('../controllers/customer/drinksController'); // Place order
 const {getGalleryItems } = require('../controllers/customer/galleryController'); // Place order
+const {getSetMealMenu} = require('../controllers/customer/setMealContorller')
 
 router.post('/contact_us',authenticate, contactUs); // Contact customer
 router.post('/reservations',authenticate, reservations); // Make reservation
+
 router.get('/takeaway', getTakeawayMenu ) // Get takeaway menu
 router.get('/dining', getDiningMenu ) // Get takeaway menu
 router.get('/drinks', getDrinksMenu ) // Get takeaway menu
@@ -23,8 +25,7 @@ router.get('/cart',authenticate, getAddToCart ) // Get all items in cart
 router.delete('/cart/:cart_id',authenticate, removeFromCart ) // Remove item from cart
 router.put('/cart/:cart_id',authenticate, updateCartItem  ) // Update quantity of an item in cart
 
-// router.put('/cart/:item_id',authenticate, updateCart )
-
+// router.put('/cart/:meal_id',authenticate, updateCart )
 
 // CheckOut/ Place order sections 
 router.post('/orders', authenticate, placeOrder ) // Place order
@@ -33,5 +34,8 @@ router.get('/orders/my', authenticate, myOrders ) // Place order
 
 // Get Gallery Items
 router.get('/getGalleryItems', getGalleryItems)
+
+// 
+router.get('/getSetMealMenu', getSetMealMenu)
 
 module.exports = router

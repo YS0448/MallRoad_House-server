@@ -3,6 +3,7 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
 const uploadImage = async (image) => {
+  console.log('image:', image);
   // Validate file type
   const allowedExtensions = /\.(png|jpg|jpeg|webp)$/i;
   if (!allowedExtensions.test(image.name)) {
@@ -25,6 +26,7 @@ const uploadImage = async (image) => {
 
   // Return relative path to serve the file later
   return `/uploads/images/food_image/${fileName}`;
+  
 };
 
 module.exports = uploadImage;

@@ -17,7 +17,7 @@ const getTakeawayMenu = async (req, res) => {
     if (!user_id || user_id === "null") {
       getTakeawayMenuQry = `
         SELECT 
-          item_id,
+          meal_id,
           category_name,
           item_name,
           description,
@@ -34,7 +34,7 @@ const getTakeawayMenu = async (req, res) => {
     } else {
       getTakeawayMenuQry = `
         SELECT 
-          tkm.item_id,
+          tkm.meal_id,
           tkm.category_name,
           tkm.item_name,
           tkm.description,
@@ -46,7 +46,7 @@ const getTakeawayMenu = async (req, res) => {
           c.cart_id
         FROM takeaway_menu tkm
         LEFT JOIN cart c 
-          ON tkm.item_id = c.item_id AND c.user_id = ?
+          ON tkm.meal_id = c.meal_id AND c.user_id = ?
         WHERE tkm.item_name LIKE ? OR tkm.category_name LIKE ? 
         ORDER BY tkm.category_name, tkm.created_at DESC
         LIMIT ? OFFSET ?
