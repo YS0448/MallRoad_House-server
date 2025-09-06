@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authenticate  = require('../middleware/authMiddleware')
-const { getTakeawayCatogories, createTakeAwayMenu } = require('../controllers/admin/takeAwayController');
+const { getTakeawayCatogories, createTakeAwayMenu, getTakeawayMenu, updateTakeawayMenu } = require('../controllers/admin/takeAwayController');
 const { getDiningCatogories, createDiningMenu } = require('../controllers/admin/diningController');
 const { getDrinksCatogories, createDrinksMenu } = require('../controllers/admin/drinksController.js');
 const { getDashboardData } = require('../controllers/admin/dashboardController.js');
@@ -10,7 +10,9 @@ const { addGalleryImage } = require('../controllers/admin/galleryController');
 const { createSetMealMenu } = require('../controllers/admin/setMealController');
 // Takeaway routes
 router.get('/getTakeawayCatogories',authenticate, getTakeawayCatogories)
-router.post('/createTakeAwayMenu',authenticate, createTakeAwayMenu)
+router.post('/createTakeAwayMenu',authenticate, createTakeAwayMenu) 
+router.get("/takeaway", authenticate, getTakeawayMenu); // get data
+router.put("/takeaway/:id", authenticate, updateTakeawayMenu); // edit data
 
 // Dining routes
 router.get('/getDiningCatogories',authenticate, getDiningCatogories)

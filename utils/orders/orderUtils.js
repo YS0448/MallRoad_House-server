@@ -21,7 +21,6 @@ async function checkItemsAvailability(items) {
 
 // Insert order header and return inserted order_id
 async function insertOrderHeader(user_id, shippingData, paymentMethod, totalAmount, createdAt, updatedAt) {
-  console.log('user_id, shippingData, paymentMethod, totalAmount, createdAt, updatedAt:', user_id, shippingData, paymentMethod, totalAmount, createdAt, updatedAt);
   const { fullName, phoneNumber, pinCode, address, landmark } = shippingData;
 
   const insertOrderQuery = `
@@ -53,7 +52,7 @@ async function insertOrderItems(orderId, items, createdAt, updatedAt) {
       throw new Error("Number of items must be greater than 0");
     }
 
-    const per_item_price = parseFloat(Number(price) + Number(extra_charge));
+    const per_item_price = parseFloat(Number(price) + Number(extra_charge || 0));
     const total_price = per_item_price * quantity;
 
     insertItemQuery = `

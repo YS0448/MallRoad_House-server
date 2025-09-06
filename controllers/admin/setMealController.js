@@ -49,7 +49,6 @@ const validateSetMealInput = (mealName, price, categories, image) => {
 // Controller
 const createSetMealMenu = async (req, res) => {
   try {
-    console.log("Creating Set Meal Menu with data:", req.body);
     const { mealName, price, categories } = req.body;
     const image = req.files && req.files.image ? req.files.image : null;
 
@@ -62,7 +61,6 @@ const createSetMealMenu = async (req, res) => {
 
     // Upload Image
     const imagePath = await uploadImage(image);
-    console.log("imagePath:", imagePath);
 
     let status="available"
     // Insert Set Meal
@@ -73,7 +71,6 @@ const createSetMealMenu = async (req, res) => {
     const currentDateTime = getUTCDateTime();
     const setMealValues = [mealName, price, imagePath, status, currentDateTime, currentDateTime];
     const result = await executeQuery(insertSetMeal, setMealValues);
-    console.log("result:", result);
 
     const setMealId = result.insertId;
 

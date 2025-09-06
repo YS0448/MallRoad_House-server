@@ -3,7 +3,6 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
 const uploadImage = async (image) => {
-  console.log('image:', image);
   // Validate file type
   const allowedExtensions = /\.(png|jpg|jpeg|webp)$/i;
   if (!allowedExtensions.test(image.name)) {

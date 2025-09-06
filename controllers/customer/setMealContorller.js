@@ -3,7 +3,6 @@ const { executeQuery } = require("../../utils/db/dbUtils");
 const getSetMealMenu = async (req, res) => {
   try {
     const user_id = req.query.user_id;
-    console.log('user_id:', user_id);
     let getQry = ` 
             SELECT 
                 s_memu.set_meal_id, 
@@ -70,7 +69,6 @@ result.forEach(row => {
 const formattedData = Object.values(mealsMap);
 
 
-    console.log('formattedData:', formattedData);
 
     res.status(200).json({ data: formattedData });
   } catch (error) {

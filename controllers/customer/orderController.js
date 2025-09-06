@@ -12,7 +12,6 @@ const {getUTCDateTime} = require("../../utils/date/dateUtils");
 const placeOrder = async (req, res) => {
   try {
     const { items, shippingData, paymentMethod, totalAmount } = req.body;
-    console.log('req.body:', req.body);
     const user_id = req?.user?.user_id || null;
 
     if (!items || !Array.isArray(items) || items.length === 0) {

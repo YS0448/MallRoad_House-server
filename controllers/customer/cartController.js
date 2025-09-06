@@ -24,7 +24,6 @@ const addToCart = async (req, res) => {
     params = [meal_id];
 
     const itemStatus = await executeQuery(checkItemStatusQuery, params);
-    console.log("itemStatus:", itemStatus);
     if (!itemStatus || itemStatus.length === 0) {
       return res.status(404).json({ message: "Item not found" });
     }
@@ -172,7 +171,6 @@ const getAddToCart = async (req, res) => {
     ]
 
     const items = await executeQuery(cartItemsQuery, params);
-    // console.log("items:", items);
 
     
 // Calculate extra charges
@@ -219,7 +217,6 @@ for (const item of items) {
       description[cat].extra = selected.extra.map((id) => itemMap[String(id)] || { id, name: null, extra_charge: 0 });
     });
 
-    console.log("Updated description:", description);
 
     // ✅ Now pass only description
     let result = getExtraChargeTotal(description);
@@ -277,7 +274,7 @@ for (const item of items) {
 
 const removeFromCart = async (req, res) => {
   try {
-    const cart_id = req.params.cart_id;
+    const cart_id = req.params.cart_id || req.params.cartId;
     // Ensure meal_id is provided
     if (!cart_id) {
       return res.status(400).json({ message: "Cart ID is required" });
@@ -287,7 +284,6 @@ const removeFromCart = async (req, res) => {
     const deleteCartQuery =
       "DELETE FROM cart WHERE user_id = ? AND cart_id = ?";
     const result = await executeQuery(deleteCartQuery, [user_id, cart_id]);
-    console.log('result:', result);
 
     // Check if any row was affected by the delete operation
     if (result.affectedRows > 0) {
@@ -304,7 +300,7 @@ const removeFromCart = async (req, res) => {
 const updateCartItem = async (req, res) => {
   const { cart_id } = req.params;
   const { quantity, description } = req.body;
-  console.log('description:', description);
+  
   const user_id = req.user.user_id;
 
   try {
@@ -316,7 +312,7 @@ const updateCartItem = async (req, res) => {
       if (deleteResult.affectedRows === 0) {
         return res
           .status(404)
-          .json({ error: "Cart item not found or unauthorized" });
+          .json({ message: "Cart item not found or unauthorized" });
       }
 
       return res.status(200).json({ message: "Cart item removed" });
@@ -341,7 +337,6 @@ const updateCartItem = async (req, res) => {
 
 
     const updateResult = await executeQuery(updateQuery, params);
-    console.log('updateResult:', updateResult);
 
     if (updateResult.affectedRows === 0) {
       return res.status(404).json({ error: "Cart item not found or unauthorized" });
